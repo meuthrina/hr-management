@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use Database\Factories\LeaveTypeFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute\Fillable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable('name', 'default_days_per_year', 'is_paid')]
 class LeaveType extends Model
 {
-    /** @use HasFactory<\Database\Factories\LeaveTypeFactory> */
+    /** @use HasFactory<LeaveTypeFactory> */
     use HasFactory;
 
-    protected functions casts(): array // This method defines the data type casting for specific attributes of the LeaveType model. It returns an array that specifies how certain attributes should be cast when retrieved from the database. In this case, the 'is_paid' attribute is cast to a 'boolean' type, ensuring that it is treated as a boolean value when working with instances of the LeaveType model.
+    protected function casts(): array
     {
         return [
             'is_paid' => 'boolean',

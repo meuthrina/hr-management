@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
+use Database\Factories\PayslipFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable('employee_id', 'period_start', 'period_end', 'gross_pay', 'issued_at', 'deductions', 'net_pay')]
 class Payslip extends Model
 {
-    /** @use HasFactory<\Database\Factories\PayslipFactory> */
+    /** @use HasFactory<PayslipFactory> */
     use HasFactory;
 
-    protected functions casts(): array // This method defines the data type casting for specific attributes of the Payslip model. It returns an array that specifies how certain attributes should be cast when retrieved from the database. In this case, the 'period_start' and 'period_end' attributes are cast to 'date' types, and the 'issued_at' attribute is cast to a 'datetime' type. This ensures that these attributes are handled correctly when working with instances of the Payslip model.
+    protected function casts(): array
     {
         return [
             'period_start' => 'date',
@@ -31,4 +34,3 @@ class Payslip extends Model
         return $this->belongsTo(Employee::class);
     }
 }
-
