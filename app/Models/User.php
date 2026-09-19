@@ -27,12 +27,19 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements PasskeyUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
+
+    public const ROLES = [ // This constant defines the different roles that a user can have in the application. It is an array of strings representing the possible roles, which include 'admin', 'manager', 'hr', and 'employee'. This can be used for role-based access control and authorization throughout the application.
+        'admin',
+        'manager',
+        'hr',
+        'employee',
+    ];
 
     /**
      * Get the attributes that should be cast.
@@ -46,5 +53,12 @@ class User extends Authenticatable implements PasskeyUser
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    // / Checks if the user has the specified role.
+    public function hasRole(string ...$role): bool
+    {
+        // This method checks if the user has any of the specified roles. It takes one or more role strings as arguments and returns a boolean value indicating whether the user's role matches any of the provided roles. The in_array function is used to check if the user's role is present in the array of specified roles, with strict comparison enabled (true) to ensure type safety.
+        return in_array($this->role, $role, true);
     }
 }

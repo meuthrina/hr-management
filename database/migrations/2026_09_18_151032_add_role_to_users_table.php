@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->string('role')->default('employee')->after('email'); // Adding a 'role' column to the 'users' table with a default value of 'employee'. This column will be used to define the role of the user in the application, such as 'admin', 'manager', 'hr', or 'employee'.
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('role'); // Dropping the 'role' column from the 'users' table in case of a rollback. This ensures that the database schema can be reverted to its previous state if needed.
         });
     }
 };
