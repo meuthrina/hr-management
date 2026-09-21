@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController; // Add this line to import the DepartmentController
 use App\Http\Controllers\PositionController; // Add this line to import the PositionController
 use App\Http\Controllers\EmployeeController; // Add this line to import the EmployeeController
+use App\Http\Controllers\LeaveTypeController; // Add this line to import the LeaveTypeController
 
 Route::inertia('/', 'welcome')->name('home');
 
@@ -32,6 +33,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('employees', [EmployeeController::class, 'store'])->name('employees.store'); // Route to create a new employee
             Route::patch('employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update'); // Route to update an existing employee
             Route::delete('employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy'); // Route to delete an existing employee
+        });
+
+        // This middleware group is for routes that require the user to have either the 'admin' or 'hr' role. It includes routes for managing leave types.
+        Route::middleware('role:admin,hr')->group(function () {
+            Route::get('leave-types', [LeaveTypeController::class, 'index'])->name('leave-types.index'); // Route to list leave types
+            Route::post('leave-types', [LeaveTypeController::class, 'store'])->name('leave-types.store'); // Route to create a new leave type
+            Route::patch('leave-types/{leaveType}', [LeaveTypeController::class, 'update'])->name('leave-types.update'); // Route to update an existing leave type
+            Route::delete('leave-types/{leaveType}', [LeaveTypeController::class, 'destroy'])->name('leave-types.destroy'); // Route to delete an existing leave type
         });
     });
 });

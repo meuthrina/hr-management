@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid, BriefcaseBusiness, Building2, Users } from 'lucide-react';
+import { BookOpen, FolderGit2, LayoutGrid, BriefcaseBusiness, Building2, Users, CalendarCog } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -44,6 +44,12 @@ const mainNavItems: GatedNavItem[] = [ // Define the main navigation items for t
         href: '/employees',
         icon: Users,
         roles: ['admin', 'hr', 'manager'], // Restricting access to the "Employees" navigation item to users with 'admin' or 'hr' roles, ensuring that only authorized users can view and access employee-related features.
+    },
+    {
+        title: 'Leave Types',
+        href: '/leave-types',
+        icon: CalendarCog,
+        roles: ['admin', 'hr'], // Restricting access to the "Leave Types" navigation item to users with 'admin' or 'hr' roles, ensuring that only authorized users can view and access leave type-related features.
     }
 ];
 
