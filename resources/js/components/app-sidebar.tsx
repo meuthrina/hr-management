@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid, BriefcaseBusiness, Building2 } from 'lucide-react';
+import { BookOpen, FolderGit2, LayoutGrid, BriefcaseBusiness, Building2, Users } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -39,6 +39,12 @@ const mainNavItems: GatedNavItem[] = [ // Define the main navigation items for t
         icon: BriefcaseBusiness,
         roles: ['admin', 'hr'], // Restricting access to the "Positions" navigation item to users with 'admin' or 'hr' roles, ensuring that only authorized users can view and access position-related features.
     },
+    {
+        title: 'Employees',
+        href: '/employees',
+        icon: Users,
+        roles: ['admin', 'hr', 'manager'], // Restricting access to the "Employees" navigation item to users with 'admin' or 'hr' roles, ensuring that only authorized users can view and access employee-related features.
+    }
 ];
 
 const footerNavItems: NavItem[] = [
